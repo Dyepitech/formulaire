@@ -11,7 +11,11 @@ if (isset($_POST['email']) && isset($_POST['sujet']) && isset($_POST['message'])
     $mail = htmlspecialchars($_POST['email']);
     $sujet = htmlspecialchars($_POST['sujet']);
     $message = htmlspecialchars($_POST['message']);
-    $civility;
+    if ($_POST['radio_male'])
+        $civility = $_POST['radio_male'];
+    else
+        $civility = $_POST['radio_female'];
+        
     if (false == filter_var($mail, FILTER_VALIDATE_EMAIL))
         $errors[] = 'Cet email n\'est pas valide';
     else if (strlen($message) < 15)
@@ -31,7 +35,7 @@ if (isset($_POST['email']) && isset($_POST['sujet']) && isset($_POST['message'])
         <form action="" method="post" style="width: 210px;">
             <span>Civilité</span>
             <div class="flex justify-between mt-5">
-                  <input type="radio" id="html" name="radio_male" value="monsieur">
+                  <input type="radio" id="html" name="radio_male" value="monsieur" checked="checked">
                   <label for="html">Monsieur</label><br>
                   <input type="radio" id="css" name="radio_female" value="madame">
                   <label for="css">Madame</label><br>
